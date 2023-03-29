@@ -67,7 +67,7 @@ func(h *authHandler) Login(ctx *gin.Context) {
 	token, err := h.authService.GenerateAccessToken(ctx, user)
 
 	ctx.JSON(http.StatusOK, gin.H{
-		"data": user,
+		"data": user.Username,
 		"token":token,
 	})
 
