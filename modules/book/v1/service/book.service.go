@@ -31,7 +31,7 @@ func(s *bookService) FindAll() ([]entity.Book, error) {
 
 func(s *bookService) FindById(ID int) (entity.Book, error) {
 	book, err := s.bookRepository.FindById(ID)
-	return book, err
+	return *book, err
 }
 
 func(s *bookService) Create(bookRequest request.BookRequest) (entity.Book, error) {
@@ -55,7 +55,7 @@ func(s *bookService) Update(ID int, bookRequest request.BookRequest) (entity.Boo
 	book.Theme = bookRequest.Theme
 	book.AuthorId = bookRequest.AuthorId
 
-	updatedBook, err := s.bookRepository.Update(book)
+	updatedBook, err := s.bookRepository.Update(*book)
 
 	return updatedBook, err
 }
@@ -63,7 +63,7 @@ func(s *bookService) Update(ID int, bookRequest request.BookRequest) (entity.Boo
 func(s *bookService) Delete(ID int) (entity.Book, error) {
 	book, err := s.bookRepository.FindById(ID)
 
-	deletedBook, err := s.bookRepository.Delete(book)
+	deletedBook, err := s.bookRepository.Delete(*book)
 
 	return deletedBook, err
 }

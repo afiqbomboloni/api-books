@@ -31,7 +31,7 @@ func(s *authorService) FindAll() ([]entity.Author, error) {
 
 func(s *authorService) FindById(ID int) (entity.Author, error) {
 	author, err := s.authorRepository.FindById(ID)
-	return author, err
+	return *author, err
 }
 
 func(s *authorService) Create(authorRequest request.AuthorRequest) (entity.Author, error) {
@@ -51,7 +51,7 @@ func(s *authorService) Update(ID int, authorRequest request.AuthorRequest) (enti
 	author.Name = authorRequest.Name
 	author.Email = authorRequest.Email
 
-	updatedAuthor, err := s.authorRepository.Update(author)
+	updatedAuthor, err := s.authorRepository.Update(*author)
 
 	return updatedAuthor, err
 }
@@ -59,7 +59,7 @@ func(s *authorService) Update(ID int, authorRequest request.AuthorRequest) (enti
 func(s *authorService) Delete(ID int) (entity.Author, error) {
 	author, err := s.authorRepository.FindById(ID)
 
-	deletedAuthor, err := s.authorRepository.Delete(author)
+	deletedAuthor, err := s.authorRepository.Delete(*author)
 
 	return deletedAuthor, err
 }

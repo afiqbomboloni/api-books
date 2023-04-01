@@ -31,7 +31,7 @@ func(s *publisherService) FindAll() ([]entity.Publisher, error) {
 
 func(s *publisherService) FindById(ID int) (entity.Publisher, error) {
 	publisher, err := s.publisherRepository.FindById(ID)
-	return publisher, err
+	return *publisher, err
 }
 
 func(s *publisherService) Create(publisherRequest request.PublisherRequest) (entity.Publisher, error) {
@@ -54,7 +54,7 @@ func(s *publisherService) Update(ID int, publisherRequest request.PublisherReque
 	publisher.City = publisherRequest.City
 	publisher.BookId = publisherRequest.BookId
 
-	updatedPublisher, err := s.publisherRepository.Update(publisher)
+	updatedPublisher, err := s.publisherRepository.Update(*publisher)
 
 	return updatedPublisher, err
 }
@@ -62,7 +62,7 @@ func(s *publisherService) Update(ID int, publisherRequest request.PublisherReque
 func(s *publisherService) Delete(ID int) (entity.Publisher, error) {
 	publisher, err := s.publisherRepository.FindById(ID)
 
-	deletedPublisher, err := s.publisherRepository.Delete(publisher)
+	deletedPublisher, err := s.publisherRepository.Delete(*publisher)
 
 	return deletedPublisher, err
 }
