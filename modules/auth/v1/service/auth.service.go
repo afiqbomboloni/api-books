@@ -30,7 +30,7 @@ func NewAuthRepository(authRepository repository.AuthRepository) *authService {
 
 func(s *authService) SaveUser(authRequest request.AuthRequest) (entity.User, error) {
 
-	hash, err := bcrypt.GenerateFromPassword([]byte(authRequest.Password), bcrypt.DefaultCost)
+	hash, _ := bcrypt.GenerateFromPassword([]byte(authRequest.Password), bcrypt.DefaultCost)
 
 	auth := entity.User {
 		Username: authRequest.Username,
@@ -58,7 +58,7 @@ func(s *authService) AuthValidate(username, password string) (*entity.User, erro
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
 
 	if err != nil {
-		return nil, errors.New("Invalid Credentials")
+		return nil, errors.New("invalid Credentials")
 	}
 
 	return user, err

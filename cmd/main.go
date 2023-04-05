@@ -20,7 +20,7 @@ func main() {
 
 	config.LoadConfig()
 	
-	config.ConnectDb().Debug().AutoMigrate(entity.Author{}, entity.Book{}, entity.Publisher{}, entity.User{})
+	config.ConnectDb().Debug().AutoMigrate(&entity.Author{}, &entity.Book{}, &entity.Publisher{}, &entity.User{})
 	fmt.Println("Success")
 
 	r := gin.New()

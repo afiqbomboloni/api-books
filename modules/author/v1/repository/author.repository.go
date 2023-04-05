@@ -42,7 +42,7 @@ func(r *authorRepository) FindAll() ([]entity.Author, error) {
 		return authors, nil
 	}
 
-	err := r.db.Model(&entity.Author{}).Preload("Books").Find(&authors).Error
+	err := r.db.Model(&entity.Author{}).Debug().Preload("Books").Find(&authors).Error
 	if err != nil {
 		return nil, err
 	}
